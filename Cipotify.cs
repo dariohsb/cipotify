@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Numerics;
 using System.Runtime.ConstrainedExecution;
+using System.Runtime.InteropServices;
 using System.Web;
 using YoutubeExplode;
 using YoutubeExplode.Videos.Streams;
@@ -14,6 +15,20 @@ namespace Cipotify
 {
     public partial class Cipotify : Form
     {
+
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+
+        private static extern IntPtr CreateRoundRectRgn
+            (
+            int nLeftRect,
+            int nTopRect,
+            int nRightRect,
+            int nBottomRect,
+            int nWidthEllipse,
+            int nHrighEllipse
+            );
+
+        private Region roundedRegion;
         private LibVLCSharp.WinForms.VideoView videoView;
         private LibVLC libVLC;
         private MediaPlayer mediaPlayer;
@@ -36,6 +51,9 @@ namespace Cipotify
         {
             InitializeComponent();
             Core.Initialize();
+
+            //Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
+            AplicarBordesRedondeados();
 
             panel_musica.Visible = true;
 
@@ -70,6 +88,15 @@ namespace Cipotify
 
             cargarBotonesMusica();
         }
+
+        private void AplicarBordesRedondeados()
+        {
+            this.Region?.Dispose();
+
+            IntPtr hRgn = CreateRoundRectRgn(0, 0, this.Width, this.Height, 25, 25);
+            this.Region = System.Drawing.Region.FromHrgn(hRgn);
+        }
+
         private void caja_video_youtube_Enter(object sender, EventArgs e)
         {
             if (caja_video_youtube.Text == "Introduce un enlace de YouTube...")
@@ -629,18 +656,22 @@ namespace Cipotify
             if (esPantallaCompleta)
             {
                 this.WindowState = FormWindowState.Normal;
-                this.FormBorderStyle = FormBorderStyle.Sizable;
+                this.FormBorderStyle = FormBorderStyle.None;
                 this.Bounds = lastFormRectangle;
                 panel_lateral.Visible = true;
                 videoView1.Dock = DockStyle.None;
 
+                this.Region = roundedRegion;
+                btn_cerrar_ventana.Visible = true;
                 esPantallaCompleta = false;
+                AplicarBordesRedondeados();
             }
             else
             {
                 lastFormRectangle = this.Bounds;
-                this.FormBorderStyle = FormBorderStyle.None;
-                this.WindowState = FormWindowState.Maximized;
+                this.Region = null;
+                this.Bounds = Screen.FromControl(this).Bounds;
+                btn_cerrar_ventana.Visible = false;
                 videoView1.Dock = DockStyle.Fill;
                 panel_lateral.Visible = false;
 
@@ -649,6 +680,25 @@ namespace Cipotify
 
             // Forzar un refresco del diseño.
             this.PerformLayout();
+        }
+
+        private void Formulario_Resize(object sender, EventArgs e)
+        {
+            if (!esPantallaCompleta)
+            {
+                AplicarBordesRedondeados();
+            }
+        }
+
+
+        private void btn_cerrar_ventana_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btn_minimizar_ventana_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

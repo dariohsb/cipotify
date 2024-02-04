@@ -54,6 +54,8 @@
             btn_pausa = new Button();
             videoView1 = new LibVLCSharp.WinForms.VideoView();
             panel_contenido = new Panel();
+            btn_minimizar_ventana = new Button();
+            btn_cerrar_ventana = new Button();
             panel_descarga = new Panel();
             label1 = new Label();
             pb_descarga = new MetroFramework.Controls.MetroProgressBar();
@@ -95,7 +97,7 @@
             // 
             // panel_lateral
             // 
-            panel_lateral.BackColor = Color.FromArgb(51, 51, 76);
+            panel_lateral.BackColor = Color.FromArgb(24, 30, 54);
             panel_lateral.Controls.Add(btn_desplegar_ajustes);
             panel_lateral.Controls.Add(panel_datos);
             panel_lateral.Controls.Add(panel_musica);
@@ -104,19 +106,20 @@
             panel_lateral.Dock = DockStyle.Left;
             panel_lateral.Location = new Point(0, 0);
             panel_lateral.Name = "panel_lateral";
-            panel_lateral.Size = new Size(255, 718);
+            panel_lateral.Size = new Size(255, 757);
             panel_lateral.TabIndex = 2;
             // 
             // btn_desplegar_ajustes
             // 
-            btn_desplegar_ajustes.BackColor = Color.FromArgb(51, 51, 76);
+            btn_desplegar_ajustes.BackColor = Color.FromArgb(24, 30, 54);
+            btn_desplegar_ajustes.Cursor = Cursors.Hand;
             btn_desplegar_ajustes.Dock = DockStyle.Bottom;
             btn_desplegar_ajustes.FlatAppearance.BorderSize = 0;
             btn_desplegar_ajustes.FlatStyle = FlatStyle.Flat;
             btn_desplegar_ajustes.Font = new Font("Verdana", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             btn_desplegar_ajustes.ForeColor = Color.Gainsboro;
             btn_desplegar_ajustes.Image = Properties.Resources.settings;
-            btn_desplegar_ajustes.Location = new Point(0, 612);
+            btn_desplegar_ajustes.Location = new Point(0, 651);
             btn_desplegar_ajustes.Name = "btn_desplegar_ajustes";
             btn_desplegar_ajustes.Padding = new Padding(35, 0, 0, 0);
             btn_desplegar_ajustes.Size = new Size(255, 55);
@@ -132,7 +135,7 @@
             panel_datos.Controls.Add(enlace_actualizacion);
             panel_datos.Controls.Add(enlace_github);
             panel_datos.Dock = DockStyle.Bottom;
-            panel_datos.Location = new Point(0, 667);
+            panel_datos.Location = new Point(0, 706);
             panel_datos.Name = "panel_datos";
             panel_datos.Size = new Size(255, 51);
             panel_datos.TabIndex = 3;
@@ -165,9 +168,10 @@
             // 
             panel_musica.AutoScroll = true;
             panel_musica.BackColor = Color.FromArgb(33, 33, 43);
+            panel_musica.Dock = DockStyle.Fill;
             panel_musica.Location = new Point(0, 133);
             panel_musica.Name = "panel_musica";
-            panel_musica.Size = new Size(255, 473);
+            panel_musica.Size = new Size(255, 624);
             panel_musica.TabIndex = 4;
             // 
             // panel_biblioteca
@@ -198,8 +202,9 @@
             // 
             // btn_desplegar_musica
             // 
-            btn_desplegar_musica.BackColor = Color.FromArgb(51, 51, 76);
+            btn_desplegar_musica.BackColor = Color.FromArgb(24, 30, 54);
             btn_desplegar_musica.BackgroundImageLayout = ImageLayout.None;
+            btn_desplegar_musica.Cursor = Cursors.Hand;
             btn_desplegar_musica.Dock = DockStyle.Top;
             btn_desplegar_musica.FlatAppearance.BorderSize = 0;
             btn_desplegar_musica.FlatStyle = FlatStyle.Flat;
@@ -228,7 +233,7 @@
             // 
             // logo
             // 
-            logo.BackColor = Color.Transparent;
+            logo.BackColor = Color.FromArgb(24, 30, 54);
             logo.BackgroundImage = Properties.Resources.cipotify;
             logo.BackgroundImageLayout = ImageLayout.Stretch;
             logo.Dock = DockStyle.Fill;
@@ -253,9 +258,9 @@
             panel_inferior.Controls.Add(btn_descargar_video);
             panel_inferior.Controls.Add(caja_video_youtube);
             panel_inferior.Dock = DockStyle.Bottom;
-            panel_inferior.Location = new Point(255, 663);
+            panel_inferior.Location = new Point(255, 702);
             panel_inferior.Name = "panel_inferior";
-            panel_inferior.Size = new Size(947, 55);
+            panel_inferior.Size = new Size(963, 55);
             panel_inferior.TabIndex = 4;
             // 
             // texto_reproduciendo
@@ -288,7 +293,7 @@
             btn_pantalla_completa.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btn_pantalla_completa.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btn_pantalla_completa.FlatStyle = FlatStyle.Flat;
-            btn_pantalla_completa.Location = new Point(892, 0);
+            btn_pantalla_completa.Location = new Point(908, 0);
             btn_pantalla_completa.Name = "btn_pantalla_completa";
             btn_pantalla_completa.Size = new Size(55, 55);
             btn_pantalla_completa.TabIndex = 10;
@@ -378,20 +383,51 @@
             videoView1.Location = new Point(0, 0);
             videoView1.MediaPlayer = null;
             videoView1.Name = "videoView1";
-            videoView1.Size = new Size(947, 663);
+            videoView1.Size = new Size(963, 702);
             videoView1.TabIndex = 5;
-            videoView1.Text = "videoView1";
             // 
             // panel_contenido
             // 
+            panel_contenido.Controls.Add(btn_minimizar_ventana);
+            panel_contenido.Controls.Add(btn_cerrar_ventana);
             panel_contenido.Controls.Add(panel_descarga);
             panel_contenido.Controls.Add(trackbar_reproduccion);
             panel_contenido.Controls.Add(videoView1);
             panel_contenido.Dock = DockStyle.Fill;
             panel_contenido.Location = new Point(255, 0);
             panel_contenido.Name = "panel_contenido";
-            panel_contenido.Size = new Size(947, 663);
+            panel_contenido.Size = new Size(963, 702);
             panel_contenido.TabIndex = 6;
+            // 
+            // btn_minimizar_ventana
+            // 
+            btn_minimizar_ventana.BackColor = Color.FromArgb(54, 59, 71);
+            btn_minimizar_ventana.FlatAppearance.BorderSize = 0;
+            btn_minimizar_ventana.FlatStyle = FlatStyle.Flat;
+            btn_minimizar_ventana.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_minimizar_ventana.ForeColor = Color.White;
+            btn_minimizar_ventana.Location = new Point(913, 0);
+            btn_minimizar_ventana.Name = "btn_minimizar_ventana";
+            btn_minimizar_ventana.Size = new Size(25, 25);
+            btn_minimizar_ventana.TabIndex = 11;
+            btn_minimizar_ventana.Text = "-";
+            btn_minimizar_ventana.UseVisualStyleBackColor = false;
+            btn_minimizar_ventana.Click += btn_minimizar_ventana_Click;
+            // 
+            // btn_cerrar_ventana
+            // 
+            btn_cerrar_ventana.BackColor = Color.FromArgb(54, 59, 71);
+            btn_cerrar_ventana.FlatAppearance.BorderSize = 0;
+            btn_cerrar_ventana.FlatStyle = FlatStyle.Flat;
+            btn_cerrar_ventana.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_cerrar_ventana.ForeColor = Color.White;
+            btn_cerrar_ventana.Location = new Point(938, 0);
+            btn_cerrar_ventana.Name = "btn_cerrar_ventana";
+            btn_cerrar_ventana.Size = new Size(25, 25);
+            btn_cerrar_ventana.TabIndex = 10;
+            btn_cerrar_ventana.Text = "X";
+            btn_cerrar_ventana.UseVisualStyleBackColor = false;
+            btn_cerrar_ventana.Click += btn_cerrar_ventana_Click;
             // 
             // panel_descarga
             // 
@@ -438,9 +474,9 @@
             trackbar_reproduccion.BackColor = Color.Transparent;
             trackbar_reproduccion.Dock = DockStyle.Bottom;
             trackbar_reproduccion.ForeColor = SystemColors.ControlText;
-            trackbar_reproduccion.Location = new Point(0, 640);
+            trackbar_reproduccion.Location = new Point(0, 679);
             trackbar_reproduccion.Name = "trackbar_reproduccion";
-            trackbar_reproduccion.Size = new Size(947, 23);
+            trackbar_reproduccion.Size = new Size(963, 23);
             trackbar_reproduccion.TabIndex = 6;
             trackbar_reproduccion.Text = "metroTrackBar1";
             trackbar_reproduccion.Scroll += trackbar_reproduccion_Scroll;
@@ -451,15 +487,16 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1202, 718);
+            ClientSize = new Size(1218, 757);
             Controls.Add(panel_contenido);
             Controls.Add(panel_inferior);
             Controls.Add(panel_lateral);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MinimumSize = new Size(1218, 757);
             Name = "Cipotify";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Cipotify";
             panel_lateral.ResumeLayout(false);
             panel_datos.ResumeLayout(false);
@@ -509,5 +546,7 @@
         private Button btn_crear_playlist;
         private Label texto_reproduciendo;
         private Label label_reproduciendo;
+        private Button btn_cerrar_ventana;
+        private Button btn_minimizar_ventana;
     }
 }

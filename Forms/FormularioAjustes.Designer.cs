@@ -49,8 +49,10 @@
             // 
             // btn_cerrar
             // 
+            btn_cerrar.FlatAppearance.BorderSize = 0;
+            btn_cerrar.FlatStyle = FlatStyle.Flat;
             btn_cerrar.Image = Properties.Resources.close;
-            btn_cerrar.Location = new Point(814, 12);
+            btn_cerrar.Location = new Point(877, 27);
             btn_cerrar.Name = "btn_cerrar";
             btn_cerrar.Size = new Size(42, 38);
             btn_cerrar.TabIndex = 0;
@@ -72,7 +74,7 @@
             // 
             // panel_ajustes_videos
             // 
-            panel_ajustes_videos.BackColor = Color.FromArgb(37, 42, 64);
+            panel_ajustes_videos.BackColor = Color.FromArgb(48, 50, 66);
             panel_ajustes_videos.Controls.Add(label2);
             panel_ajustes_videos.Controls.Add(cb_reproducir_auto);
             panel_ajustes_videos.Location = new Point(56, 80);
@@ -95,7 +97,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Microsoft Sans Serif", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.FromArgb(158, 161, 176);
+            label1.ForeColor = Color.FromArgb(160, 161, 176);
             label1.Location = new Point(56, 32);
             label1.Name = "label1";
             label1.Size = new Size(118, 33);
@@ -104,7 +106,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.FromArgb(37, 42, 64);
+            panel1.BackColor = Color.FromArgb(48, 50, 66);
             panel1.Controls.Add(eliminar_videos);
             panel1.Controls.Add(label3);
             panel1.Location = new Point(56, 264);
@@ -139,7 +141,7 @@
             // 
             // panel3
             // 
-            panel3.BackColor = Color.FromArgb(37, 42, 64);
+            panel3.BackColor = Color.FromArgb(48, 50, 66);
             panel3.Controls.Add(metroLabel1);
             panel3.Controls.Add(panel4);
             panel3.Controls.Add(label6);
@@ -198,7 +200,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(41, 53, 65);
+            BackColor = Color.FromArgb(54, 59, 71);
             ClientSize = new Size(931, 624);
             Controls.Add(panel3);
             Controls.Add(panel1);

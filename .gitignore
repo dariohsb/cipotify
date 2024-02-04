@@ -1,0 +1,26 @@
+# Archivos y carpetas relacionados con el IDE
+*.user
+*.suo
+*.userosscache
+.vs/
+
+# Archivos de compilación
+[Bb]in/
+[Oo]bj/
+*.pdb
+*.exe
+*.dll
+
+# Carpetas de paquetes NuGet
+packages/
+
+# Archivos de configuración de compilación
+*.psess
+*.vsp
+*.vspx
+
+# Otras carpetas y archivos que pueden contener información sensible o no esencial
+*.cache
+*.bak
+*.[Ll]og
+
