@@ -576,7 +576,7 @@ namespace Cipotify
 
         private async void enlace_actualizacion_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string currentVersion = "0.4";
+            string currentVersion = "0.5";
             string owner = "cipotemanx";
             string repo = "cipotify";
 
