@@ -46,13 +46,13 @@ namespace Cipotify
         private const int DragThreshold = 5; // Umbral para iniciar arrastre, en píxeles
         private bool isDragging = false;
         private Point mouseDownLocation;
+        private bool reproduciendo = false;
 
         public Cipotify()
         {
             InitializeComponent();
             Core.Initialize();
 
-            //Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
             AplicarBordesRedondeados();
 
             panel_musica.Visible = true;
@@ -202,6 +202,10 @@ namespace Cipotify
                 }
                 panel_descarga.Visible = false;
             }
+
+            texto_reproduciendo.Text = videoName;
+            label_reproduciendo.Visible = true;
+            texto_reproduciendo.Visible = true;
 
             using var media = new Media(libVLC, path, FromType.FromPath);
             mediaPlayer.Play(media);
@@ -471,24 +475,34 @@ namespace Cipotify
         }
         private void ReproducirSiguienteCancion()
         {
+            if (reproduciendo) return;
+
+            reproduciendo = true;
             this.Invoke((MethodInvoker)delegate
             {
-                // Si el checkbox está marcado, incrementa CancionActual y reproduce la siguiente canción
                 CancionActual++;
                 if (CancionActual >= panel_musica.Controls.Count)
                 {
-                    // Si llegaste al final de la lista, vuelve al inicio
                     CancionActual = 0;
                 }
 
-                // Obtiene el botón de la siguiente canción y hace clic en él para reproducirla
-                var siguienteBoton = panel_musica.Controls[CancionActual] as Button;
-                string path = Path.Combine(folderPath, $"{siguienteBoton.Text}.mp4");
-                reproducirMusica(path);
+                // Verificación adicional para evitar NullReferenceException
+                if (panel_musica.Controls[CancionActual] is Button siguienteBoton)
+                {
+                    string path = Path.Combine(folderPath, $"{siguienteBoton.Text}.mp4");
+                    if (File.Exists(path))
+                    {
+                        reproducirMusica(path);
+                    }
+                }
+                reproduciendo = false;
             });
         }
         private void ReproducirCancionAnterior()
         {
+            if (reproduciendo) return;
+
+            reproduciendo = true;
             this.Invoke((MethodInvoker)delegate
             {
                 CancionActual--;
@@ -497,11 +511,19 @@ namespace Cipotify
                     CancionActual = panel_musica.Controls.Count - 1;
                 }
 
-                var anteriorBoton = panel_musica.Controls[CancionActual] as Button;
-                string path = Path.Combine(folderPath, $"{anteriorBoton.Text}.mp4");
-                reproducirMusica(path);
+                // Verificación adicional para evitar NullReferenceException
+                if (panel_musica.Controls[CancionActual] is Button anteriorBoton)
+                {
+                    string path = Path.Combine(folderPath, $"{anteriorBoton.Text}.mp4");
+                    if (File.Exists(path))
+                    {
+                        reproducirMusica(path);
+                    }
+                }
+                reproduciendo = false;
             });
         }
+
         private void HandleEndReached(object sender, EventArgs e)
         {
             this.Invoke((MethodInvoker)delegate
