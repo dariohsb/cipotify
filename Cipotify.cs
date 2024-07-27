@@ -43,7 +43,7 @@ namespace Cipotify
         private Rectangle lastFormRectangle;
         private bool esPantallaCompleta = false;
 
-        private const int DragThreshold = 5; // Umbral para iniciar arrastre, en pÌxeles
+        private const int DragThreshold = 5; // Umbral para iniciar arrastre, en p√≠xeles
         private bool isDragging = false;
         private Point mouseDownLocation;
         private bool reproduciendo = false;
@@ -126,13 +126,13 @@ namespace Cipotify
             }
             catch (UriFormatException)
             {
-                MessageBox.Show("Por favor, introduce una URL v·lida de YouTube.");
+                MessageBox.Show("Por favor, introduce una URL v√°lida de YouTube.");
                 return;
             }
 
             if (uri.Host != "youtu.be" && uri.Host != "www.youtube.com")
             {
-                MessageBox.Show("Por favor, introduce una URL v·lida de YouTube.");
+                MessageBox.Show("Por favor, introduce una URL v√°lida de YouTube.");
                 return;
             }
 
@@ -220,7 +220,7 @@ namespace Cipotify
 
             if (string.IsNullOrWhiteSpace(input))
             {
-                MessageBox.Show("El nombre de la playlist no puede estar vacÌo.");
+                MessageBox.Show("El nombre de la playlist no puede estar vac√≠o.");
                 return;
             }
             string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -246,7 +246,7 @@ namespace Cipotify
 
         public void cargarBotonesMusica()
         {
-            panel_musica.SuspendLayout(); // Detiene el diseÒo temporalmente
+            panel_musica.SuspendLayout(); // Detiene el dise√±o temporalmente
 
             DirectoryInfo mainDir = new DirectoryInfo(folderPath);
 
@@ -273,7 +273,7 @@ namespace Cipotify
                 }
             };
 
-            // Cargar las canciones que no est·n en ninguna playlist
+            // Cargar las canciones que no est√°n en ninguna playlist
             foreach (var filePattern in new[] { "*.mp3", "*.mp4" })
             {
                 foreach (var file in mainDir.GetFiles(filePattern))
@@ -368,7 +368,7 @@ namespace Cipotify
                 trashButton.Click += (sender, e) =>
                 {
                     string directoryToDelete = (sender as Button).Tag.ToString();
-                    DialogResult dialogResult = MessageBox.Show("øEst·s seguro de que deseas eliminar esta playlist?", "Eliminar Playlist", MessageBoxButtons.YesNo);
+                    DialogResult dialogResult = MessageBox.Show("¬øEst√°s seguro de que deseas eliminar esta playlist?", "Eliminar Playlist", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
                         Directory.Delete(directoryToDelete, true);
@@ -434,7 +434,7 @@ namespace Cipotify
                     if (!isDragging && (Math.Abs(e.X - mouseDownLocation.X) > DragThreshold || Math.Abs(e.Y - mouseDownLocation.Y) > DragThreshold))
                     {
                         isDragging = true;
-                        // Inicia el arrastre aquÌ
+                        // Inicia el arrastre aqu√≠
                         button.DoDragDrop(file.FullName, DragDropEffects.Move);
                     }
                 }
@@ -444,7 +444,7 @@ namespace Cipotify
             {
                 if (e.Button == MouseButtons.Left && !isDragging)
                 {
-                    // Ejecuta la lÛgica de clic aquÌ, es decir, reproducir la canciÛn
+                    // Ejecuta la l√≥gica de clic aqu√≠, es decir, reproducir la canci√≥n
                     CancionActual = panel.Controls.GetChildIndex(button);
                     string path = Path.Combine(file.DirectoryName, file.Name);
                     reproducirMusica(path);
@@ -486,7 +486,7 @@ namespace Cipotify
                     CancionActual = 0;
                 }
 
-                // VerificaciÛn adicional para evitar NullReferenceException
+                // Verificaci√≥n adicional para evitar NullReferenceException
                 if (panel_musica.Controls[CancionActual] is Button siguienteBoton)
                 {
                     string path = Path.Combine(folderPath, $"{siguienteBoton.Text}.mp4");
@@ -511,7 +511,7 @@ namespace Cipotify
                     CancionActual = panel_musica.Controls.Count - 1;
                 }
 
-                // VerificaciÛn adicional para evitar NullReferenceException
+                // Verificaci√≥n adicional para evitar NullReferenceException
                 if (panel_musica.Controls[CancionActual] is Button anteriorBoton)
                 {
                     string path = Path.Combine(folderPath, $"{anteriorBoton.Text}.mp4");
@@ -564,7 +564,7 @@ namespace Cipotify
 
         private void enlace_github_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string url = "https://github.com/cipotemanx";
+            string url = "https://github.com/dariohsb";
             Process.Start(new ProcessStartInfo() { FileName = url, UseShellExecute = true });
         }
 
@@ -577,7 +577,7 @@ namespace Cipotify
         private async void enlace_actualizacion_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             string currentVersion = "0.5";
-            string owner = "cipotemanx";
+            string owner = "dariohsb";
             string repo = "cipotify";
 
             string url = $"https://api.github.com/repos/{owner}/{repo}/releases/latest";
@@ -593,11 +593,11 @@ namespace Cipotify
 
             if (latestVersion != currentVersion)
             {
-                MessageBox.Show("Hay una nueva versiÛn disponible!");
+                MessageBox.Show("Hay una nueva versi√≥n disponible!");
             }
             else
             {
-                MessageBox.Show("Est·s utilizando la versiÛn m·s reciente");
+                MessageBox.Show("Est√°s utilizando la versi√≥n m√°s reciente");
             }
         }
         private void btn_desplegar_ajustes_Click(object sender, EventArgs e)
@@ -700,7 +700,7 @@ namespace Cipotify
                 esPantallaCompleta = true;
             }
 
-            // Forzar un refresco del diseÒo.
+            // Forzar un refresco del dise√±o.
             this.PerformLayout();
         }
 
