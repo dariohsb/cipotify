@@ -13,7 +13,7 @@ Cipotify es una aplicación de gestión de música de escritorio personalizada, 
 
 Para usar Cipotify, sigue estos pasos:
 
-1. Descarga el programa en el apartado de [Releases](https://github.com/cipotemanx/cipotify/releases)
+1. Descarga el programa en el apartado de [Releases](https://github.com/dariohsb/cipotify/releases)
 2. Introduce el vídeo de youtube a descargar.
 3. Disfruta de tu música.
 
